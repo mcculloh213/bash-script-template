@@ -420,6 +420,7 @@ Usage:
      -v|--verbose               Displays verbose output
     -nc|--no-colour             Disables colour output
     -cr|--cron                  Run silently unless we encounter an error
+       |--hostname              Display the system's hostname
 EOF
 }
 
@@ -445,6 +446,9 @@ function parse_params() {
             -cr | --cron)
                 cron=true
                 ;;
+            --hostname)
+                hostname=true
+                ;;
             *)
                 script_exit "Invalid parameter was provided: $param" 1
                 ;;
@@ -464,6 +468,11 @@ function main() {
     cron_init
     colour_init
     #lock_init system
+
+    if [[ -n ${hostname-} ]]; then
+        pretty_print "Hello, $(hostname)!"; else
+        pretty_print "Hello, World!"
+    fi
 }
 
 # Invoke main with args if not sourced
