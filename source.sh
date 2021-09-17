@@ -330,7 +330,7 @@ function check_binary() {
 
     if ! command -v "$1" > /dev/null 2>&1; then
         if [[ -n ${2-} ]]; then
-            script_exit "Missing dependency: Couldn't locate $1." 1
+            script_exit "Missing dependency: Couldn't locate $1." 3
         else
             verbose_print "Missing dependency: $1" "${fg_red-}"
             return 1
